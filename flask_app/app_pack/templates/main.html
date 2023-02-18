@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='rooms.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing_page.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chatroom.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">-->
+
+    <script src="{{ url_for('static', filename='scripts/jQuery.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='scripts/fontAwesome.js') }}" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/scripts.js') }}" defer></script>
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    {% block nav_bar %}
+    <header>
+        <div id="logo-box-room">
+            <a href="{{ url_for('rooms') }}" class="">getAroom</a>
+        </div>
+        <div id="search-box-resp">
+            <form method="POST" id="room-form hide-search">
+                <input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div style="display: inline-block; width: auto;">
+                    <input type="search" id="search-field" name="query" placeholder="Search" require>
+                </div>
+                    <button onclick="func(event)" style="height: 20px; width: 20px; background: none; border: none;"><i class="fa-solid fa-magnifying-glass"></i></i></button>
+            </form>
+        </div>
+        <div id="search-box">
+            <form method="POST" id="room-form">
+                <input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div style="display: inline-block; width: auto;">
+                    <input type="search" id="search-field" name="query" placeholder="Search" require>
+                </div>
+                <div style="height: 20px; width: 20px; display: inline-block;">
+                    <input id="img-submit" onclick="func(event)" type="image" src="{{ url_for('static', filename='images/search.png') }}" alt="search" style="height: 80%; width: 80%;">
+                </div>
+            </form>
+        </div>
+        <div id="room-nav">
+            <button onclick="clicked()" style="background: none; border: none;"><div id="fabars"><i class="fa-solid fa-bars"></i></div></button>
+            <ul class="nav-list-resp">
+                {% if current_user.is_authenticated %}
+					<li><a href="{{ url_for('rooms') }}"><strong>Rooms</strong></a></li>
+					<li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+					<li><a href="{{ url_for('logout') }}"><strong>Logout</strong></a></li>
+					<li><a href="{{ url_for('profile') }}"><strong>Profile</strong></a></li>
+				{% else %}
+					<li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+				{% endif %}
+            </ul>
+            
+            <ul style="list-style-type: none;" class="nav-list">
+                {% if current_user.is_authenticated %}
+					<li><a href="{{ url_for('rooms') }}"><strong>Rooms</strong></a></li>
+					<li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+					<li><a href="{{ url_for('logout') }}"><strong>Logout</strong></a></li>
+					<li><a href="{{ url_for('profile') }}"><strong>Profile</strong></a></li>
+				{% else %}
+					<li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+				{% endif %}
+            </ul>
+        </div>
+    </header>
+    {% endblock nav_bar %}
+	{% block content %}{% endblock content %}
+    {% block end %}{% endblock end %}
+</body>
+</html>

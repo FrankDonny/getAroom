@@ -1,0 +1,422 @@
+#user-data {
+    display: none;
+}
+
+#chatroom-section {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    grid-template-areas: "chatPage Members";
+    grid-column-gap: 30px;
+    padding-top: 80px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+#chatPage {
+    background-color: #202123;
+    border-radius: 5px;
+    grid-area: chatPage;
+    height: 86vh;
+    position: relative;
+    overflow-y: hidden;
+}
+
+#chatHeader {
+    width: 95%;
+    height: auto;
+    margin: 10px auto auto auto;
+}
+
+#chatTail {
+    width: 95%;
+    height: 74%;
+    border-radius: 5px;
+    margin: auto;
+    position: relative;
+}
+
+#roomName-div {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    width: 100%;
+    height: 32px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+#leave {
+    text-align: right;
+    display: inline-block;
+    width: 100%;
+    color: rgb(186, 57, 57);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#leave p {
+    display: inline-block;
+    width: 80px
+}
+
+#creator-date {
+    width: 100%;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    display: grid;
+
+}
+
+#imageBox1 {
+    width: 37px;
+    height: 37px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px rgb(161, 0, 220) solid;
+    margin: auto 10px auto 0;
+}
+
+#imageBox1-user {
+    display: inline-block;
+    width: auto;
+    font-size: large;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    top: 0;
+    position: absolute;
+    margin: 5px auto;
+    color: rgb(41, 97, 180);
+}
+
+#name {
+    color: rgb(41, 97, 180);
+}
+
+#roomDesc {
+    font-size: small;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#romCreated_at {
+    display: inline-block;
+    font-size: small;
+    text-align: end;
+}
+
+#messages {
+    width: 100%;
+    height: 85%;
+    background-color: #444654;
+    overflow-y: auto;
+    padding-bottom: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 1px solid #444654;
+}
+
+#messageBox {
+    display: block;
+    bottom: 0;
+    width: 100%;
+    height: 15%;
+    background-color: #343541;
+    margin: auto;
+    position: absolute;
+}
+
+.message {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 60%;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    border-left: 5px solid wheat;
+    background-color: #202123;
+    border-radius: 5px;
+}
+
+.messageBody {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: auto;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.userMessage {
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    width: 60%;
+    margin-left: 38.5%;
+    margin-top: 10px;
+    border-right: 5px solid wheat;
+    border-radius: 5px;
+    background-color: #33363c;
+    padding-bottom: 5px;
+}
+
+.messageStyle {
+    border-bottom: 1px solid #444654;
+    height: 27px;
+    padding-left: 4px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.userStyle {
+    border-bottom: 1px solid #444654;
+    height: 27px;
+    padding-left: 4px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    color: whitesmoke;
+}
+
+#messageBox form {
+    padding-top: 20px;
+    height: 100%;
+    text-align: center;
+}
+
+textarea {
+    padding: 5px;
+    padding-left: 10px;
+    padding-top: 5px;
+    width: 80%;
+    resize: none;
+    border-radius: 10px;
+    height: 30px;
+}
+
+#sendBox {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 8px;
+    top: 20px;
+    position: absolute;
+}
+
+#sendMsg {
+    background: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    font-size: 1.2rem;
+}
+
+.otherUser {
+    display: inline-block;
+    color: rgba(245, 245, 245, 0.404);
+    font-size: 13px;
+    width: 55%;
+    padding-top: 2px;
+}
+
+.messageUser {
+    display: inline-block;
+    color: rgba(245, 245, 245, 0.404);
+    font-size: 13px;
+    width: 50%;
+    padding-top: 2px;
+}
+
+.messageCreated {
+    display: inline-block;
+    width: 40%;
+    text-align: right;
+    color: rgba(245, 245, 245, 0.404);
+    font-size: 13px;
+    padding-top: 2px;
+}
+
+#deleteMessage {
+    display: inline-block;
+    width: 5%;
+    margin-left: 20px;
+    font-size: 13px;
+    padding-top: 2px;
+}
+
+#delete {
+    padding-top: 5px;
+}
+
+#Members {
+    background-color: #202123;
+    border-radius: 5px;
+    grid-area: Members;
+}
+
+#heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    font-weight: bolder;
+    height: 62px;
+    border-bottom: 1px wheat solid;
+}
+
+#usersContainer {
+    display: grid;
+    background-color: #343541;
+    height: 90%;
+}
+
+.imageBox {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px rgb(161, 0, 220) solid;
+    margin: auto 10px auto 0;
+}
+
+.chatUserName {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: light;
+    margin: auto 0;
+}
+
+.usersList {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgba(245, 222, 179, 0.15);
+    height: 45px;
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 480px) {
+    #chatroom-section {
+        display: grid;
+        grid-template-columns: 100%;
+        height: 100vh;
+        padding-top: 80px;
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+
+    #chatPage {
+        background-color: #202123;
+        border-radius: 5px;
+        grid-area: chatPage;
+        height: 98%;
+        position: relative;
+    }
+
+    #chatHeader {
+        width: 98%;
+        height: auto;
+        margin: 4px auto auto auto;
+        padding-top: 5px;
+    }
+
+    #chatTail {
+        width: 98%;
+        height: 87%;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        margin: 1% auto auto auto;
+        position: relative;
+    }
+
+    #creator-date {
+        width: 97%;
+        height: auto;
+    }
+
+    #Members {
+        display: none;
+    }
+
+    #roomName-div {
+        font-size: 0.7rem;
+        width: 97%;
+        height: auto;
+        margin-bottom: 5px;
+    }
+
+    #name {
+        display: inline-block;
+        width: 40%;
+        margin-top: 5px;
+        font-size: 1rem;
+    }
+
+    #leave {
+        position: absolute;
+        right: 8px;
+        width: 90px;
+        border: rgb(159, 57, 57) 1px solid;
+        border-radius: 5px;
+        padding: 5px;
+        padding-top: 7px;
+        background: none;
+        font-size: 0.7rem;
+        vertical-align: middle
+    }
+
+    #leave p {
+        display: inline-block;
+        width: 55px;
+    }
+
+    #imageBox1-user {
+        width: 40%;
+        padding-top: 7px;
+        font-size: 0.9rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+    }
+
+    #messages {
+        width: 100%;
+        height: 79%;
+    }
+
+    #imageBox1 {
+        width: 28px;
+        height: 28px;
+    }
+
+    #messageBox {
+        display: block;
+        bottom: 45px;
+        width: 100%;
+        height: 12%;
+        background-color: #343541;
+        margin: auto;
+        position: absolute;
+    }
+
+    .message {
+        width: 95%;
+    }
+
+    .userMessage {}
+
+    .messageCreated {
+        display: inline-block;
+        width: 30%;
+        text-align: right;
+        color: rgba(245, 245, 245, 0.404);
+        font-size: 13px;
+        padding-top: 2px;
+        padding-right: 5px;
+    }
+}

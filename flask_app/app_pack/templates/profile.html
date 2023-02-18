@@ -1,0 +1,117 @@
+{% extends 'main.html' %}
+{% block title %}Profile | {{ current_user.name }}{% endblock title %}
+{% block nav_bar %}
+    <header>
+        <div id="logo-box-room">
+            <a href="{{ url_for('rooms') }}" class="">getAroom</a>
+        </div>
+        <div id="search-box-resp">
+            <form method="POST" id="room-form hide-search">
+                <input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div style="display: inline-block; width: auto;">
+                    <input type="search" id="search-field" name="query" placeholder="Search" require>
+                </div>
+                    <button onclick="func(event)" style="height: 20px; width: 20px; background: none; border: none;"><i class="fa-solid fa-magnifying-glass"></i></i></button>
+            </form>
+        </div>
+        <div id="room-nav">
+            <button onclick="clicked()" style="background: none; border: none;"><div id="fabars"><i class="fa-solid fa-bars"></i></div></button>
+            <ul class="nav-list-resp">
+                <li><a href="{{ url_for('rooms') }}"><strong>Rooms</strong></a></li>
+                <li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+                <li><a href="{{ url_for('logout') }}"><strong>Logout</strong></a></li>
+                <li><a href="{{ url_for('profile', user_id=current_user.id[:13]) }}"><strong>Profile</strong></a></li>
+            </ul>
+            
+            <ul style="list-style-type: none;" class="nav-list">
+                <li><a href="{{ url_for('rooms') }}"><strong>Rooms</strong></a></li>
+                <li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+                <li><a href="{{ url_for('logout') }}"><strong>Logout</strong></a></li>
+                <li><a href="{{ url_for('profile', user_id=current_user.id[:13]) }}"><strong>Profile</strong></a></li>
+            </ul>
+        </div>
+    </header>
+{% endblock nav_bar %}
+{% block content %}
+<section id="profile_section">
+    <center>
+        <div id="profile-user-name">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h1>MY PROFILE &#40;{{ current_user.name }}&#41;</h1>
+        </div>
+    </center>
+    <div id="profile_form">
+        <form method="POST" action="/profile/{{ current_user.id[:13] }}" class="profile-form-class" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div id="profile_container">
+                <div id="image_container">
+                    <div id="image-box">
+                        {% set imageName = 'images/' + current_user.profile_image %}
+                        <img src="{{ url_for('static', filename=imageName) }}" alt="profile picture" class="pro-img">
+                    </div>
+                </div>
+                <div id="others">
+                    <div id="profile_name">Name&#58; {{ current_user.name }}</div>
+                    <div id="profile_email">Email&#58; {{ current_user.email }}</div>
+                    <div id="profile_phoneNum">Phone Number&#58; {{ current_user.number }}</div>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            {{ form.profileName.label() }}
+            {% if form.profileName.errors %}
+				{{ form.profileName(class="form_look-danger") }}
+                {% for error in form.profileName.errors %}
+                    <div class="error-div">{{ error }}</div>
+                {% endfor %}
+            {% else %}
+                {{ form.profileName(class="form_look") }}
+            {% endif %}
+            <br>
+            {{ form.proEmail.label() }}
+            {% if form.proEmail.errors %}
+                {{ form.proEmail(class="form_look-danger") }}
+                {% for error in form.proEmail.errors %}
+                    <div class="error-div">{{ error }}</div>
+                {% endfor %}
+            {% else %}
+                {{ form.proEmail(class="form_look") }}
+            {% endif %}
+            <br>
+            {{ form.proNumber.label() }}
+            {% if form.proNumber.errors %}
+                {{ form.proNumber(class="form_look-danger") }}
+                {% for error in form.proNumber.errors %}
+                    <div class="error-div">{{ error }}</div>
+                {% endfor %}
+            {% else %}
+                {{ form.proNumber(class="form_look") }}
+            {% endif %}
+            <br>
+            {{ form.profileImg.label(style="font-size: larger;") }}
+            <div id="upload-pic">
+                {% if form.profileImg.errors %}
+                    {{ form.profileImg(style="font-size: 15px; text-align: left; padding-left: 15px; margin-bottom: 10px") }}
+                    {% for error in form.profileImg.errors %}
+                        <div class="error-div">{{ error }}</div>
+                    {% endfor %}
+                {% else %}
+                    {{ form.profileImg(style="font-size: 15px; text-align: left; padding-left: 15px; margin-bottom: 10px") }}
+                {% endif %}
+                <hr>
+                <p>Please provide a <strong>square-sized</strong> image of <strong>2mb size</strong></p>
+            <br>
+            </div>
+            {{ form.proSubmit(class="submit-btn") }}
+        </form>
+        <br>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,102 @@
+{% extends "main.html" %}
+{% block title %}Get A Room{% endblock title %}
+{% block nav_bar %}
+    <style>
+    header{
+        border-bottom: none;
+    }
+
+
+
+    #logo-box-index {
+        width: 20%;
+        height: 100%;
+        /* margin: auto 25%; */
+        padding-top: 10px;
+        text-align: center;
+        font-size:x-large;
+        font-weight: bolder;
+    }
+
+    #indexNav {
+        display: flex;
+        align-items: center;
+        width: 80%;
+        justify-content: flex-end;
+    }
+
+    #logo-box-index a {
+        color: orange;
+    }
+
+    @media screen and (max-width: 700px){
+        #logo-box-index{
+            width: 30%;
+        }
+
+        #indexNav {
+            width: 70%;
+        }
+    }
+    </style>
+    <header>
+    <div id="logo-box-index">
+        <a href="{{ url_for('index') }}">
+            getAroom
+        </a>
+    </div>
+    <div id="indexNav">
+        <ul class="nav-list-hide">
+            <li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+        </ul>
+        <ul class="nav-list">
+            <li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+        </ul>
+    </div>
+    </header>
+{% endblock nav_bar %}
+{% block content %}
+    <section id="bg">
+        <section id="landing">
+            <div id="intro">
+                <h1>CONNECT WITH CHURCH FELLOWS</h1>
+                <div style="height: 180px; text-overflow: ellipsis; overflow: hidden;">
+                    <p>
+                        Welcome to getAroom application. A platform
+                        where you can meet and chat with distant
+                        church colleagues, create a room and have
+                        your discussions there.
+                    </p>
+                    <br>
+                    <p>
+                        Invite others to <a href="{{ url_for('login') }}"><strong>join</strong></a> the room, meet new
+                        people from other branches and have fun...
+                    </p>
+                </div>
+                <div id="introButton">
+                    <button onclick="window.location.href = '/signup'">Create Account</button>
+                    <button onclick="window.location.href = '/login'">Login</button>
+                </div>
+            </div>
+            <div id="second">second</div>
+            <div id="idxReviews">
+                <div id="reviewContainer">
+                    <p>Reviews</p>
+                    {% for review in reviews %}
+                        <div class="reviewBox">
+                            <div style="height: 70%; background-color: white; border-radius: 10px; padding-top: 10px">{{ review[2] }}</div>
+                            <div style="height: 27%; display: flex; margin: auto; border-radius: 10px;">
+                                <div style="width: 25px; height: 25px; display: inline-block; margin: auto 3px; border-radius: 50%; border: 2px solid orange;">
+                                    {% set image = 'images/' + review[1] %}
+                                    <img src="{{ url_for('static', filename=image) }}" alt="" class="pro-img">
+                                </div>
+                                <div class="revName">{{ review[0] }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="fourth">fourth</div>
+        </section>
+    </section>
+{% endblock content %}

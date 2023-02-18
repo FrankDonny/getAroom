@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+{% block nav_bar %}{% endblock nav_bar %}
+{% block content %}
+<div id="roomSection">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% for item in roomDetails %}
+        <div id="item">
+            <div id="group">
+                <div id="userImage">
+                    <div id="itemUserImg"><img src="{{ url_for('static', filename='images/' + item['profileImg']) }}" alt="" id="usrImg"></div>
+                    <div id="userName">&#64;{{ item['userName'] }} </div>
+                </div>
+                <div id="roomNameDate">
+                    <div id="roomName">
+                        <p>&ldquo;{{ item['roomName'] }}&rdquo;</p>
+                    </div>
+                    {% if (theTime - item['created_at']).days == 0 and (theTime.hour - item['created_at'].hour)|abs == 0 and (theTime.minute - item['created_at'].minute)|abs == 0 %}
+                        <div id="created_at"><small>&#8226; {{ (theTime.second - item['created_at'].second)|abs }}s ago</small></div>
+                    {% elif (theTime - item['created_at']).days == 0 and (theTime.hour - item['created_at'].hour)|abs == 0 and (theTime.minute - item['created_at'].minute)|abs != 0 %}
+                        <div id="created_at"><small>&#8226; {{ (theTime.minute - item['created_at'].minute)|abs }}m ago</small></div>
+                    {% elif (theTime - item['created_at']).days == 0 and (theTime.hour - item['created_at'].hour)|abs != 0 %}
+                        <div id="created_at"><small>&#8226; {{ (theTime.hour - item['created_at'].hour)|abs }}h ago</small></div>
+                    {% elif (theTime - item['created_at']).days == 1 %}
+                        <div id="created_at"><small>&#8226; {{ (theTime - item['created_at']).days }} day ago</small></div>
+                    {% elif (theTime - item['created_at']).days < 7 %}
+                        <div id="created_at"><small>&#8226; {{ (theTime - item['created_at']).days }} days ago</small></div>
+                    {% else %}
+                        {% for weekNum in weeks%}
+                            {% if (theTime - item['created_at']).days == weekNum %}
+                                <div id="created_at"><small>&#8226; {{ weeks[weekNum] }} weeks ago</small></div>
+                            {% elif (theTime - item['created_at']).days < weekNum and (theTime - item['created_at']).days > (weekNum - 7) %}
+                                <div id="created_at"><small>&#8226; {{ weeks[weekNum] - 1 }} weeks ago</small></div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div id="itemBottom">
+                <div id="roomDescription">{{ item['roomDescription'] }}</div>
+                {% if item.creator_id == current_user.id %}
+                    <div id="btnBox">
+                        <a href="/chatroom/{{ current_user.id[:13] }}/{{ item['roomID'] }}">
+                            <button class="btn">Join</button>
+                        </a>
+                    </div>
+                    <div id="deleteBtn">
+                        <form method="POST" action="">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="roomID" value="{{ item.roomID }}">
+                            <a href=""><button class="btn">Delete</button></a>
+                        </form>
+                    </div>
+                {% else %}
+                    <div id="btnBox">
+                        <a href="/chatroom/{{ current_user.id[:13] }}/{{ item['roomID'] }}"><button class="btn">Join</button></a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

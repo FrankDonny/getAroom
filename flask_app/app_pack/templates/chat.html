@@ -1,0 +1,186 @@
+{% extends 'main.html' %}
+{% block title %}Get A Room | Chat Room{% endblock title %}
+{% block nav_bar %}
+<header>
+    <div id="logo-box-room">
+        <a href="{{ url_for('rooms') }}" class="">getAroom</a>
+    </div>
+    <div id="room-nav">
+        <button onclick="clicked()" style="background: none; border: none;"><div id="fabars"><i class="fa-solid fa-bars"></i></div></button>
+        <ul class="nav-list-resp">
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('rooms') }}"><strong>Rooms</strong></a></li>
+                <li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+                <li><a href="{{ url_for('logout') }}"><strong>Logout</strong></a></li>
+                <li><a href="{{ url_for('profile') }}"><strong>Profile</strong></a></li>
+            {% endif %}
+        </ul>
+        
+        <ul style="list-style-type: none;" class="nav-list">
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('rooms') }}"><strong>Rooms</strong></a></li>
+                <li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+                <li><a href="{{ url_for('logout') }}"><strong>Logout</strong></a></li>
+                <li><a href="{{ url_for('profile') }}"><strong>Profile</strong></a></li>
+            {% endif %}
+        </ul>
+    </div>
+</header>
+{% endblock nav_bar %}
+{% block content %}
+<section id="chatroom-section">
+    <div id="user-data" data-user-id="{{ current_user.id }}"></div>
+    <div id="chatPage">
+        <div id="chatHeader">
+            <div id="roomName-div">
+                <p id="name">{{ rom.name|title }}</p>
+                <div id="leave" onClick="exitRoom()">
+                    <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
+                    <p>Exit Room</p>
+                </div>
+            </div>
+            <div id="creator-date">
+                <div style="height: auto; font-size: 1rem; width: 100%; display: block; color: #61626b;">Host <i class="fa fa-level-down" aria-hidden="true"></i></div>
+                <div style="position: relative; padding-top: 2px; height: auto;">
+                    <div id="imageBox1">
+                        {% set imageName = 'images/' + creator.profile_image %}
+                        <img src="{{ url_for('static', filename=imageName) }}" alt="profile picture" class="pro-img">
+                    </div>
+                    <div id="imageBox1-user">@{{ creator.name }}</div>
+                </div>
+                <div style="height: auto; width: 100%; display: grid; grid-template-columns: 70% 30%; color: #61626b;">
+                    <div id="roomDesc"><strong>About&#58;</strong> {{ rom.description }}</div>
+                    <div id="romCreated_at">
+                        <small>&#8226; {{ rom['created_at'].strftime("%d %B, %Y") }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="chatTail">
+            <div style="position: relative; height: 100%">
+                <div id="messages">
+                    {% for message in messages %}
+                        {% if message[1].name == current_user.name %}
+                            <div class="userMessage">
+                                <div class="userStyle">
+                                    <div class="messageUser">
+                                        You
+                                    </div>
+                                    {% if message[0].created_at.date() == theTime.date() %}
+                                        <div class="messageCreated">
+                                            <small>&#8226; {{ message[0].created_at.strftime("%I:%M %p") }}</small>
+                                        </div>
+                                    {% else %}
+                                        {% if (theTime - message[0].created_at).days < 7 %}
+                                            <div class="messageCreated">
+                                                <small>&#8226; {{ (theTime - message[0].created_at).days }}d ago</small>
+                                            </div>
+                                        {% elif (theTime - message[0].created_at).days > 6 and (theTime - message[0].created_at).days < 31 %}
+                                            <div class="messageCreated">
+                                                <small>&#8226; {{ (theTime - message[0].created_at).days // 7 }}w ago</small>
+                                            </div>
+                                        {% elif ((theTime - message[0].created_at).days // 7) > 4 and (theTime - message[0].created_at).days // 7 < 52 %}
+                                            <div class="messageCreated">
+                                                <small>&#8226; {{ (message[0].created_at.year - theTime.year) * 12 + (message[0].created_at.month - theTime.month) }}m ago</small>
+                                            </div>
+                                        {% else %}
+                                            <div class="messageCreated">
+                                                <small>&#8226; {{ message[0].created_at.year - theTime.year }}y ago</small>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                    <div style="display: inline-block;">
+                                        <input type="hidden" name="roomID" value="{{ rom.id }}">
+                                        <a href="{{ url_for('deleteMessage', id=message[0].id) }}">
+                                            <small>&#124; <i class="fa-solid fa-trash-arrow-up" id="delete"></i></small>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="messageBody">
+                                    {{ message[0].text }}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="message">
+                                <div class="messageStyle">
+                                    <div class="otherUser">
+                                        {{ message[1].name }}
+                                    </div>
+                                    {% if message[0].created_at.date() == theTime.date() %}
+                                        <div class="messageCreated">
+                                            <small>&#8226; {{ message[0].created_at.strftime("%I:%M %p") }}</small>
+                                        </div>
+                                    {% else %}
+                                        {% if (theTime - message[0].created_at).days < 7 %}
+                                            <div class="messageCreated">
+                                                <small>&#8226; {{ (theTime - message[0].created_at).days }}d ago</small>
+                                            </div>
+                                        {% elif (theTime - message[0].created_at).days > 6 and (theTime - message[0].created_at).days < 31 %}
+                                            <div class="messageCreated">
+                                                <small>&#8226; {{ (theTime - message[0].created_at).days // 7 }}w ago</small>
+                                            </div>
+                                        {% elif ((theTime - message[0].created_at).days // 7) > 4 and (theTime - message[0].created_at).days // 7 < 52 %}
+                                            <div class="messageCreated">
+                                                <small>&#8226; {{ (message[0].created_at.year - theTime.year) * 12 + (message[0].created_at.month - theTime.month) }}m ago</small>
+                                            </div>
+                                        {% else %}
+                                            <div class="messageCreated">
+                                                <small>&#8226; {{ message[0].created_at.year - theTime.year }}y ago</small>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="messageBody">
+                                    {{ message[0].text }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div id="messageBox">
+                    <form action="">
+                        <textarea name="textBox" id="textBoxID" rows="1"></textarea>
+                        <div id="sendBox">
+                            <input type="hidden" id="sendUser" value="{{ current_user.name }}">
+                            <button type="submit" name="send" value="send" id="sendMsg">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Members">
+        <div id="heading">
+            <p>Room Members: {{ count }}</p>
+        </div>
+        <div id="usersContainer">
+            <div style="overflow: auto">
+                {% for user in users %}
+                    <div class="usersList">
+                        <div class="imageBox">
+                            {% set imageName = 'images/' + user.profile_image %}
+                            <img src="{{ url_for('static', filename=imageName) }}" alt="profile picture" class="pro-img">
+                        </div>
+                        <div class="chatUserName">
+                            <p>{{ user.name }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+{% block end %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='scripts/socketio.js') }}"></script>
+<script>
+    const chatBox = document.getElementById("messages")
+    chatBox.scrollTop = chatBox.scrollHeight;
+    const current_userID = `{{ current_user.id }}`;
+	const csrf_token = `{{ csrf_token() }}`;
+    const current_userName = `{{ current_user.name }}`
+</script>
+{% endblock end %}

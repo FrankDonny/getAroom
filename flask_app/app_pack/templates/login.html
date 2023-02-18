@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+{% block title %}Login{% endblock title %}
+<!--{% block nav_bar  %}{% endblock nav_bar %}-->
+{% block content %}
+	<center><section class="container">
+		<div class="logo-box">
+			<a href="{{ url_for('index') }}">
+				getAroom
+			</a>
+		</div>
+		<div class="form_div">
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+					{% for category, message in messages %}
+						<p class="hide">{{ message }}</p>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+					{% for category, message in messages %}
+						<div class="alert {{ category }}">{{ message }}</div>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			<form method="POST" class="form-class">
+				{{ form.hidden_tag() }}
+				{{ form.email.label() }}
+				{% if form.email.errors %}
+					{{ form.email(class="form_look-danger", placeholder="Enter Email") }}
+					{% for error in form.email.errors %}
+						<div class="error-div">{{ error }}</div>
+					{% endfor %}
+				{% else %}
+					{{ form.email(class="form_look", placeholder="Enter Email") }}
+				{% endif %}
+				 <br>
+				{{ form.password.label() }}
+				{% if form.password.errors %}
+					{{ form.password(class="form_look-danger", placeholder="Enter Password") }}
+					{% for error in form.password.errors %}
+						<div class="error-div">{{ error }}</div>
+					{% endfor %}
+				{% else %}
+					{{ form.password(class="form_look", placeholder="Enter Password") }}
+				{% endif %}
+				<br>
+				{{ form.remember }}
+				{{ form.remember.label }}
+				<br>
+				{{ form.submit(class="submit-btn", value="login") }}
+			</form>
+		</div>
+		<div class="nav">
+			<p>Don't have an account&quest; </p>
+			<a href="{{ url_for('signup') }}"><p><strong>Create One</strong></p></a>
+
+        </div>
+	</section></center>
+{% endblock content %}

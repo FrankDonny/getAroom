@@ -1,0 +1,112 @@
+.container {
+    margin: 10vh 0;
+    max-width: 400px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: #2a2c30;
+    padding-top: 30px;
+}
+
+.form-class {
+    text-align: center;
+    background-color: #202123;
+    padding: 20px;
+    border-radius: 30px;
+    border: solid lightgray;
+    /* max-width: 30vw;
+    min-width: 30vw; */
+    width: 80%;
+    margin: auto;
+}
+
+.form-class input {
+    margin: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form_div {
+    width: 100%;
+    /* margin: auto 25%; */
+    padding-top: 5vh;
+}
+
+.form_look {
+    display: flex;
+    width: 60%;
+    height: 25px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.form_look-danger {
+    display: flex;
+    width: 60%;
+    height: 25px;
+    border: red solid 1px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.error-div {
+    background-color: rgb(251, 99, 99);
+    color: white;
+    text-align: center;
+    font-size: small;
+    border-radius: 8px;
+    width: 60%;
+    height: 25px;
+    margin: 3px auto auto auto;
+    text-align: center;
+}
+
+.submit-btn {
+    border-radius: 60px;
+    background-color: #e6f9af;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    height: 30px;
+    width: 60px;
+    /* margin-bottom: 10px; */
+}
+
+.submit-btn:hover {
+    background-color: lightgray;
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 70%;
+        margin: 10vh 15%;
+    }
+
+    .form_div {
+        margin: auto;
+        width: 70vw;
+    }
+
+    .form-class {
+        width: 90%;
+        border: none;
+    }
+
+    .form-class input {
+        font-size: 11px;
+    }
+
+    .form-class label {
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    #hide-time-update,
+    #hide-time-create {
+        display: flex;
+        position: fixed;
+        float: right;
+        right: 16px;
+        top: 59px;
+        width: 5px;
+    }
+}

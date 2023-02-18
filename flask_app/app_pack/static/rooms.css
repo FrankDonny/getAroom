@@ -1,0 +1,922 @@
+#fabars {
+    display: none;
+}
+
+.hidesuccess,
+.hideerror {
+    display: none;
+}
+
+#logo-box-room {
+    width: 20%;
+    height: 100%;
+    /* margin: auto 25%; */
+    padding-top: 10px;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+#logo-box-room a {
+    color: orange;
+}
+
+#search-box {
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    /* padding-top: 9px; */
+    display: grid;
+    place-items: center;
+}
+
+#room-nav {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    justify-content: flex-end;
+    float: right;
+    right: 0;
+    position: fixed;
+    height: 57px;
+}
+
+#room-nav button {
+    display: none;
+}
+
+#searchSidebar {
+    position: fixed;
+    float: left;
+    left: 0;
+    height: 95vh;
+    background-color: #444654;
+    z-index: 2;
+    width: 25vw;
+    margin-top: 56px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    /* box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5); */
+}
+
+#search-result {
+    width: 100%;
+    height: 50px;
+    background-color: #343541;
+    color: white;
+    font-size: larger;
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 20px;
+}
+
+#results {
+    width: 100%;
+    height: 84vh;
+    overflow: auto;
+    padding: 0 10px 0 10px;
+    border-bottom: solid 1px rgba(245, 222, 179, 0.141);
+}
+
+#return {
+    float: left;
+    position: fixed;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding-top: 10px;
+    border-right: rgb(245 222 179 / 21%) 1px solid;
+}
+
+#return:hover {
+    background-color: #202123;
+}
+
+#searchResultHead {
+    margin-left: 0;
+    padding-top: 10px;
+    padding-left: 45px;
+    width: 100%;
+    height: 50px;
+    border-left: none;
+    border-bottom: 1px solid rgba(245 222 179 / 21%);
+    text-align: center;
+    /* display: inline-block;
+    padding-top: 10px;
+    height: 50px;
+    width: 87.5%;
+    margin-left: 50px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-left: rgba(245, 222, 179, 0.168) solid 1px; */
+}
+
+#updateSidebar,
+#createSidebar {
+    display: none;
+}
+
+/**/
+
+.searchbtnBox {
+    display: inline-block;
+    right: 2px;
+    bottom: 2px;
+}
+
+.searchBtn {
+    width: 50px;
+    height: 20px;
+    border-radius: 5px;
+    font-size: 12px;
+    border: none;
+    position: absolute;
+}
+
+.searchdeleteBtn {
+    margin-left: 60px;
+    display: inline-block;
+}
+
+.searchitemBottom {
+    position: relative;
+    height: 60px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 20px;
+    background-color: #202123;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 15px;
+}
+
+.searchroomNameDate {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+}
+
+.searchroomName {
+    height: 30px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.searchroomName p {
+    font-size: small;
+    background-color: #202123;
+    height: 100%;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.searchuserName {
+    margin: 0 0 0 10px;
+    font-size: medium;
+    font-weight: bold;
+    color: rgb(31, 204, 201);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.searchusrImg {
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.searchitemUserImg {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchuserImage {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    padding-left: 10px;
+    height: 30px;
+}
+
+.searchgroup {
+    padding: 5px 0;
+    height: auto;
+    width: 100%;
+    border-bottom: 1px solid rgba(245, 222, 179, 0.15);
+}
+
+.searchitem {
+    background-color: #343541;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 140px;
+    padding: 5px;
+}
+
+/**/
+
+#roomBody {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: "sideSection roomSection recentActSection";
+    grid-column-gap: 30px;
+    padding-top: 70px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    background-size: cover;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
+#anotherSide {
+    display: none;
+}
+
+#search-field {
+    padding: 0 16px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: none;
+    width: 100%;
+    height: 30px;
+}
+
+/* side section start */
+#sideSection {
+    grid-area: sideSection;
+    height: 89vh;
+    position: sticky;
+    top: 70px;
+    background-color: #343541;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+#updateRoomDiv,
+#createRoomDiv {
+    border-bottom: solid rgba(245, 222, 179, 0.25) 1px;
+    width: 90%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#update,
+#create {
+    display: block;
+    width: 140px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    font-size: large;
+    font-weight: 500;
+    text-align: center;
+    background-color: #008080;
+    color: white;
+    margin: 10px auto;
+}
+
+#update:hover,
+#create:hover {
+    background-color: #444654;
+    color: #202123;
+    transition: 0.1s;
+}
+
+#updateRoomForm,
+#createRoomForm {
+    display: none;
+}
+
+#search-box-resp,
+#updateRoomForm-resp,
+#createRoomForm-resp {
+    display: none;
+}
+
+#updateRoomClass,
+#createRoomClass {
+    text-align: center;
+    background-color: #202123;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+#updateRoomClass input,
+#createRoomClass input {
+    margin: auto;
+}
+
+#bibleSlide {
+    width: 90%;
+    min-height: 200px;
+    background-color: #444654;
+    margin: 20px auto;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#review {
+    font-size: 1rem;
+    width: 100%;
+    /* margin-top: 180px; */
+    /* position: absolute; */
+    padding: 0 15px;
+    padding-bottom: 10px;
+}
+
+#reviewInput {
+    height: 100px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* side section end */
+
+/* rooms section start */
+
+.item {
+    background-color: #343541;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    height: 155px;
+    padding: 5px;
+}
+
+/* #proDisplay {
+    width: 100%;
+} */
+
+#roomSection {
+    grid-area: roomSection;
+}
+
+.group {
+    padding: 5px 0;
+    height: auto;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.211);
+}
+
+.userImage {
+    display: flex;
+    position: relative;
+    /* justify-content: left; */
+    margin-left: 10px;
+}
+
+.itemUserImg {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.usrImg {
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.userName {
+    margin: 2px 0 5px 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgb(31, 204, 201);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.created_at {
+    position: absolute;
+    float: right;
+    right: 0;
+    text-align: right;
+    padding-right: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgb(31, 204, 201);
+}
+
+.roomName {
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+    display: inline-block;
+}
+
+.roomName p {
+    /* background-color: #202123; */
+    height: 100%;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 8px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.descP {
+    padding-left: 16px;
+}
+
+.roomNameDate {
+    width: 100%;
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+    /* column-gap: 10px; */
+}
+
+.itemBottom {
+    position: relative;
+    height: 40px;
+    padding-left: 10px;
+    /* background-color: #202123; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btnBox {
+    position: absolute;
+    display: inline-block;
+    bottom: 10px;
+}
+
+.deleteBtn {
+    position: absolute;
+    display: inline-block;
+    left: 60px;
+    bottom: 10px;
+}
+
+#del {
+    border-left: 1px solid white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.btn {
+    width: 50px;
+    height: 20px;
+    font-size: 12px;
+    border: none;
+    background-color: #444654;
+    color: white;
+}
+
+.join {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.btn:hover {
+    background-color: orange;
+}
+
+.users {
+    position: absolute;
+    float: right;
+    right: 0;
+    height: 100%;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* rooms section end */
+
+/* recent activities section start */
+#recentActSection {
+    grid-area: recentActSection;
+    height: 89vh;
+    position: sticky;
+    top: 70px;
+    background-color: #343541;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+#recent-box {
+    border-bottom: solid rgba(245, 222, 179, 0.25) 1px;
+    margin: auto;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    height: 70px;
+    width: 100%;
+    text-align: center;
+    padding-top: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#recent-box p {
+    height: 70%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#messageHeader {
+    background-color: #444654;
+    padding: 5px;
+}
+
+#proImage {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    border-radius: 50%;
+    margin: auto 5px auto 0;
+    display: inline-block;
+}
+
+#messageBody {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: auto;
+    margin-top: 5px;
+    border-left: 2px solid #444654;
+    padding-left: 5px;
+}
+
+/* recent activities section end */
+
+@media screen and (max-width: 480px) {
+
+    .userImage {
+        display: inline;
+        position: relative;
+        /*grid-template-columns: 20% ; */
+        /* position: relative; */
+        /* margin-left: 10px; */
+    }
+
+    .created_at {
+        display: none;
+        float: right;
+        right: -25px;
+        position: absolute;
+        font-size: 0.5rem;
+    }
+
+    .roomName {
+        height: 15px;
+    }
+
+    .roomName p {
+        padding: 0;
+        height: 20px;
+        font-size: 0.6rem;
+        padding-top: 2.5px;
+        margin: 0;
+    }
+
+    .descP {
+        padding-left: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .group {
+        height: 70px;
+    }
+
+    .itemBottom {
+        height: 40px;
+        width: 100%;
+        /* padding-top: 5px; */
+    }
+
+    .btn {
+        /* display: none; */
+        /* position: absolute; */
+        font-size: 0.6rem;
+        height: 15px;
+        width: 30px;
+    }
+
+    .deleteBtn {
+        left: 40px;
+    }
+
+    #del {
+        padding: 0 5px;
+        width: auto;
+    }
+
+    .users {
+        float: left;
+        left: 0;
+        bottom: 0;
+        position: absolute;
+        width: 80px;
+        height: auto;
+        padding-left: 10px;
+    }
+
+    .deleteBtn,
+    .btnBox {
+        bottom: 20px;
+    }
+
+    #fabars {
+        display: flex;
+        margin-right: 10px;
+        width: 45px;
+        height: 25px;
+        text-align: center;
+        align-items: center;
+        font-size: 35px;
+    }
+
+    #roomBody {
+        grid-template-columns: 15% 82%;
+        grid-template-areas: "anotherSide roomSection";
+        padding-left: 0;
+        padding-right: 10px;
+        grid-column-gap: 3%;
+    }
+
+    #roomSection {
+        display: grid;
+        grid-template-columns: 47% 47%;
+        grid-gap: 15px;
+        width: 100%;
+    }
+
+    #sideSection,
+    #recentActSection {
+        display: none;
+    }
+
+    #anotherSide {
+        display: grid;
+        height: 200px;
+        width: 15%;
+        position: fixed;
+        background-color: #343541;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-size: 25px;
+    }
+
+    #anotherSide ul {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #anotherSide ul li {
+        display: block;
+        height: 72px;
+    }
+
+    #anotherSide ul li button {
+        color: whitesmoke;
+    }
+
+    #search-box {
+        display: none;
+    }
+
+    #search-box-resp {
+        width: 270px;
+        height: 25px;
+        text-align: center;
+        /* padding-top: 9px; */
+        display: none;
+        place-items: center;
+        font-size: 0.5rem;
+        margin-top: 15px;
+    }
+
+    #logo-box-room {
+        height: 57px;
+        width: 130px;
+        padding-left: 5px;
+    }
+
+    #createImg,
+    #updateImg,
+    #searchImg {
+        font-size: small;
+    }
+
+    #room-nav button {
+        display: block;
+    }
+
+    #search-result #return {
+        height: 40px;
+    }
+
+    #return {
+        border-right: 1px solid rgba(245, 222, 179, 0.13);
+    }
+
+    #updateSidebar,
+    #createSidebar {
+        display: block;
+        position: fixed;
+        float: left;
+        left: 15%;
+        top: 30%;
+        min-height: 30vh;
+        background-color: #444654;
+        z-index: 2;
+        width: 70vw;
+        box-shadow: 0 0 10px gray;
+        /* margin-top: 56px; */
+        /* transform: translateX(-100%); */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #updateSideHead,
+    #createSideHead {
+        /* display: none; */
+        margin-left: 0;
+        padding-top: 10px;
+        padding-left: 45px;
+        width: 100%;
+        height: 50px;
+        border-left: none;
+        border-bottom: 1px solid rgba(245, 222, 179, 0.13);
+        text-align: center;
+    }
+
+    .theForm {
+        min-height: 24vh;
+        width: 100%;
+        background-color: #202123;
+        font-size: 0.8rem;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .sideContainer2,
+    .sideContainer1 {
+        height: 100vh;
+        width: 100vw;
+        z-index: 1;
+        position: fixed;
+        float: left;
+        background-color: #444654f0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .side_form_look_danger,
+    .side_form_look {
+        width: 90%;
+        height: 20px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 0.7rem;
+    }
+
+    .side_form_look_danger {
+        border: red solid 1px;
+    }
+
+    .resp {
+        margin: 0 10px 15px 10px;
+    }
+
+    .submit-btn-resp {
+        width: 40%;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #d6e9c6;
+        border: none;
+        font-size: 0.7rem;
+    }
+
+    #searchSidebar {
+        width: 35vh;
+    }
+
+    #search-result {
+        width: 100%;
+        height: 40px;
+        background-color: #343541;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: bolder;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 20px;
+    }
+
+    #results {
+        width: 100%;
+        height: 80vh;
+        overflow: auto;
+        padding: 0 10px 0 10px;
+        border-bottom: solid 1px rgba(245, 222, 179, 0.141);
+    }
+
+    #search-field-resp {
+        padding: 0.2rem;
+        padding-left: 0.5rem;
+        font-size: 1rem;
+        border-radius: 25px;
+        border: none;
+        width: 100%;
+    }
+
+    #searchField_div {
+        display: inline-block;
+        width: 95px;
+    }
+
+    .searchuserName,
+    .searchroomName p,
+    .searchitem {
+        font-size: 0.8rem;
+    }
+
+    .item {
+        display: grid;
+        width: 100%;
+        height: 120px;
+        display: inline-block;
+        margin: 0;
+        font-size: 0.7rem;
+        padding: 0;
+    }
+
+    .itemUserImg {
+        width: 20px;
+        height: 20px;
+        /* font-size: 10px; */
+    }
+
+    .itemUserImg img {
+        width: 15px;
+    }
+
+    .userName {
+        margin-left: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+        font-size: 0.6rem;
+    }
+
+    .roomDescription {
+        height: 40%;
+    }
+
+    .hideerror,
+    .hidesuccess {
+        margin-left: 30%;
+        margin-right: 30%;
+        top: 50px;
+        position: fixed;
+        z-index: 5;
+        background-color: #dff0d8;
+        color: #3c763d;
+        border-color: #d6e9c6;
+        border-radius: 5px;
+        text-align: center;
+        height: 20px;
+        width: 40%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.6rem;
+        padding-top: 3px;
+    }
+
+    .hideerror {
+        background-color: #f2dede;
+        color: #a94442;
+        border-color: #ebccd1;
+    }
+
+    .success {
+        display: none;
+    }
+}

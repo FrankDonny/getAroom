@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+{% block title %}Get A Room | Signup{% endblock title %}
+{% block nav_bar %}
+{% endblock nav_bar %}
+{% block content %}
+	<center><section class="container">
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<p class="hide">{{ message }}</p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<div class="alert {{ category }}">{{ message }}</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		<div class="logo-box">
+			<a href="{{ url_for('index') }}">
+				getAroom
+			</a>
+		</div>
+		<div class="form_div">
+			<form method="POST" class="form-class">
+				{{ form.hidden_tag() }}
+				{{ form.userName.label() }}
+				{% if form.userName.errors %}
+					{{ form.userName(class="form_look-danger", placeholder="Enter User Name") }}
+					{% for error in form.Name.errors %}
+						<div class="error-div">{{ error }}</div>
+					{% endfor %}
+				{% else %}
+					{{ form.userName(class="form_look", placeholder="Enter User Name") }}
+				{% endif %}
+				<br>
+				{{ form.userEmail.label() }}
+				{% if form.userEmail.errors %}
+					{{ form.userEmail(class="form_look-danger", placeholder="Enter Email") }}
+					{% for error in form.userEmail.errors %}
+						<div class="error-div">{{ error }}</div>
+					{% endfor %}
+				{% else %}
+					{{ form.userEmail(class="form_look", placeholder="Enter Email") }}
+				{% endif %}
+				<br>
+				{{ form.userNumber.label() }}
+				{% if form.userNumber.errors %}
+					{{ form.userNumber(class="form_look-danger", placeholder="Enter Phone Number") }}
+					{% for error in form.userNumber.errors %}
+						<div class="error-div">{{ error }}</div>
+					{% endfor %}
+				{% else %}
+					{{ form.userNumber(class="form_look", placeholder="Enter Phone Number") }}
+				{% endif %}
+				<br>
+				{{ form.userPassword.label() }}
+				{{ form.userPassword(class="form_look", placeholder="Enter password") }}
+				<br>
+				{{ form.userPassword2.label() }}
+				{% if form.userPassword2.errors %}
+					{{ form.userPassword2(class="form_look-danger", placeholder="Confirm Password") }}
+					{% for error in form.userPassword2.errors %}
+						<div class="error-div">{{ error }}</div>
+					{% endfor %}
+				{% else %}
+					{{ form.userPassword2(class="form_look", placeholder="Confirm Password") }}
+				{% endif %}
+				<br>
+				{{ form.submit(class="submit-btn") }}
+			</form>
+		</div>
+		<div class="nav">
+			<p>Already a User&quest;</p>
+			<a href="{{ url_for('login') }}"><p><strong>Login</strong></p></a>
+		</div>
+	</section></center>
+{% endblock content %}

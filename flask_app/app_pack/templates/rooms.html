@@ -1,0 +1,386 @@
+{% extends 'main.html' %}
+{% block title %}Get A Room | Rooms - {{ userName }}{% endblock title %}
+{% block nav_bar %}
+<header>
+	<div id="logo-box-room">
+		<a href="{{ url_for('rooms') }}">getAroom</a>
+	</div>
+	<div id="search-box-resp">
+		<form method="POST" id="room-form hide-search">
+			<input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+			<div id="searchField_div">
+				<input type="search" id="search-field-resp" name="query" placeholder="Search" require>
+			</div>
+				<button onclick="func1(event)" style="height: 20px; width: 20px; background: none; border: none;"></button>
+		</form>
+	</div>
+	<div id="search-box">
+		<form method="POST" id="room-form">
+			<input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+			<input type="search" id="search-field" name="query" placeholder="Search" require>
+		</form>
+	</div>
+	<div id="room-nav">
+		<button onclick="clicked()" style="background: none; border: none;"><div id="fabars"><i class="fa-solid fa-bars"></i></div></button>
+		<ul class="nav-list-resp">
+			<li><a href="{{ url_for('rooms') }}"><strong>Rooms</strong></a></li>
+			<li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+			<li><a href="{{ url_for('logout') }}"><strong>Logout</strong></a></li>
+			<li><a href="{{ url_for('profile', user_id=current_user.id[:13]) }}"><strong>Profile</strong></a></li>
+		</ul>
+		
+		<ul style="list-style-type: none;" class="nav-list">
+			<li><a href="{{ url_for('rooms') }}"><strong>Rooms</strong></a></li>
+			<li><a href="{{ url_for('about') }}"><strong>About</strong></a></li>
+			<li><a href="{{ url_for('logout') }}"><strong>Logout</strong></a></li>
+			<li><a href="{{ url_for('profile', user_id=current_user.id[:13]) }}"><strong>Profile</strong></a></li>
+		</ul>
+	</div>
+</header>
+{% endblock nav_bar %}
+{% block content %}
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<p class="alert hide{{ category }}">{{ message }}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<section id="searchSidebar">
+		<div id="search-result">
+			<div id="return" onclick="returnBtn('#searchSidebar')">&#8592;</div>
+			<div id="searchResultHead">Search Results:</div>
+		</div>
+		<div id="results">
+		</div>
+	</section>
+	<section class="sideContainer1">
+		<div id='createSidebar'>
+			<div id="return" onclick="returnBtn('.sideContainer1')">&#8592;</div>
+			<div id="createSideHead">Create Room</div>
+			<div class="theForm">
+				<form action="" method="POST">
+					{{ form.hidden_tag() }}
+					<div class="resp">
+						{{ form.roomName.label() }}
+						{% if form.roomName.errors %}
+							{{ form.roomName(class="side_form_look-danger", placeholder="Room Name") }}
+							{% for error in form.roomName.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ form.roomName(class="side_form_look", placeholder="Room Name") }}
+						{% endif %}
+					</div>
+					<div class="resp">
+						{{ form.roomDescription.label() }}
+						{% if form.roomDescription.errors %}
+							{{ form.roomDescription(class="side_form_look-danger", placeholder="Room Description") }}
+							{% for error in form.roomDescription.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ form.roomDescription(class="side_form_look", placeholder="Room Description") }}
+						{% endif %}
+					</div>
+					<div>{{ form.submit(class="submit-btn-resp", value="create") }}</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<section class="sideContainer2">
+		<div id="updateSidebar">
+			<div id="return" onclick="returnBtn('.sideContainer2')">&#8592;</div>
+			<div id="updateSideHead">Update Room</div>
+			<div class="theForm">
+				<form action="" method="POST">
+					{{ updateForm.hidden_tag() }}
+					<input type="hidden" name="formUpdate" value="formUpdate">
+					<div class="resp">
+						{{ updateForm.roomNameToUpdate.label() }}
+						{% if updateForm.roomNameToUpdate.errors %}
+							{{ updateForm.roomNameToUpdate(class="side_form_look-danger", placeholder="Enter Room Name To Upate") }}
+							{% for error in updateForm.name.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ updateForm.roomNameToUpdate(class="side_form_look", placeholder="Enter Room Name To Upate") }}
+						{% endif %}
+					</div>
+					<div class="resp">
+						{{ updateForm.updateName.label() }}
+						{% if updateForm.updateName.errors %}
+							{{ updateForm.updateName(class="side_form_look-danger", placeholder="Room Name") }}
+							{% for error in form.updateName.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ updateForm.updateName(class="side_form_look", placeholder="Room Name") }}
+						{% endif %}
+					</div>
+					<div class="resp">
+						{{ updateForm.updateDescription.label() }}
+						{% if updateForm.updateDescription.errors %}
+							{{ updateForm.updateDescription(class="side_form_look-danger", placeholder="Room Description") }}
+							{% for error in updateForm.updateDescription.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ updateForm.updateDescription(class="side_form_look", placeholder="Room Description") }}
+						{% endif %}
+					</div>
+					<div>{{ form.submit(class="submit-btn-resp", value="update") }}</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<section id="roomBody">
+		{% set rooom_id = "" %}
+		<div id="anotherSide">
+			<ul>
+				<li id="click1"><button style="border: none; background: none" onclick="click1('.sideContainer1')"><i class="fa-solid fa-square-plus"></i><div id="createImg">Create</div></button></li>
+				<li id="click2"><button style="border: none; background: none" onclick="click1('.sideContainer2')"><i class="fa-solid fa-pen-to-square"></i><div id="updateImg">Update</div></li>
+				<li id="click3"><button style="border: none; background: none" onclick="click3()"><i class="fa-solid fa-magnifying-glass"></i><div id="searchImg">Search</div></li>
+			</ul>
+		</div>
+		<div id="sideSection">
+			<div style="background-color: #f5c6cb; color: #721c24; text-align: center; width: 100%; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+			</div>
+			<div id="createRoomDiv">
+				<div style="width: 100%; overflow: hidden;">
+					<button id="create">
+						&plus;Create Room
+					</button>
+				</div>
+				<div id="createRoomForm">
+					<form action="" method="POST" id="createRoomClass">
+						{{ form.hidden_tag() }}
+						{{ form.roomName.label() }}
+						{% if form.roomName.errors %}
+							{{ form.roomName(class="form_look-danger", placeholder="Enter Room Name") }}
+							{% for error in form.roomName.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ form.roomName(class="form_look", placeholder="Enter Room Name") }}
+						{% endif %}
+						<br>
+						{{ form.roomDescription.label() }}
+						{% if form.roomDescription.errors %}
+							{{ form.roomDescription(class="form_look-danger", placeholder="Room Description") }}
+							{% for error in form.roomDescription.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ form.roomDescription(class="form_look", placeholder="Room Description") }}
+						{% endif %}
+						<br>
+						{{ form.submit(class="submit-btn", value="create") }}
+					</form>
+				</div>
+			</div>
+			<div id="updateRoomDiv">
+				<div style="width: 100%; overflow: hidden;">
+					<button id="update">
+						Update Room
+					</button>
+				</div>
+				<div id="updateRoomForm">
+					<form action="" method="POST" id="updateRoomClass">
+						{{ updateForm.hidden_tag() }}
+						{{ updateForm.roomNameToUpdate.label() }}
+						{% if updateForm.roomNameToUpdate.errors %}
+							{{ updateForm.roomNameToUpdate(class="form_look-danger", placeholder="Enter Room Name To Upate") }}
+							{% for error in updateForm.name.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ updateForm.roomNameToUpdate(class="form_look", placeholder="Enter Room Name To Upate") }}
+						{% endif %}
+						<br>
+						{{ updateForm.updateName.label() }}
+						{% if updateForm.updateName.errors %}
+							{{ updateForm.updateName(class="form_look-danger", placeholder="Enter Room Name") }}
+							{% for error in form.updateName.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ updateForm.updateName(class="form_look", placeholder="Enter Room Name") }}
+						{% endif %}
+						<br>
+						{{ updateForm.updateDescription.label() }}
+						{% if updateForm.updateDescription.errors %}
+							{{ updateForm.updateDescription(class="form_look-danger", placeholder="Room Description") }}
+							{% for error in updateForm.updateDescription.errors %}
+								<div class="error-div">{{ error }}</div>
+							{% endfor %}
+						{% else %}
+							{{ updateForm.updateDescription(class="form_look", placeholder="Room Description") }}
+						{% endif %}
+						<input type="hidden" name="formUpdate" value="formUpdate">
+						<br>
+						{{ updateForm.updateSubmit(class="submit-btn", value="update") }}
+						<br>
+					</form>
+				</div>
+			</div>
+			<div id="bibleSlide">
+				Bible slides here soon...
+			</div>
+			<div id="review">
+				<p>Kindly <strong id="inner" style="color: #8dca24; text-decoration: underline; cursor: pointer;">click_here</strong> to leave a review below based on your experience here. Thank You.</p>
+				<div id="revDiv" style="display: none;">
+					<form method="POST" action="">
+						<textarea name="review" id="reviewInput" style="border: none; " cols="30" rows="10"></textarea>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="roomSection">
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+					{% for category, message in messages %}
+						<p class="alert {{ category }}">{{ message }}</p>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			{% for item in roomDetails %}
+			{% set rooom_id = item.roomID %}
+				<div class="item">
+					<div class="group">
+						<div class="userImage">
+							{% set imageName = 'images/' + item['profileImg'] %}
+							<div class="itemUserImg"><img src="{{ url_for('static', filename=imageName) }}" alt="" class="usrImg"></div>
+							<div class="userName">&#64;{{ item['userName'] }} </div>
+							{% if item['created_at'].date() == theTime.date() %}
+								<div class="created_at">
+									<small>&#8226; {{ item['created_at'].strftime("%I:%M %p") }}</small>
+								</div>
+							{% else %}
+								{% if (theTime - item['created_at']).days < 7 %}
+									<div class="created_at">
+										<small>&#8226; {{ (theTime - item['created_at']).days }}d ago</small>
+									</div>
+								{% elif (theTime - item['created_at']).days > 6 and (theTime - item['created_at']).days < 31 %}
+									<div class="created_at">
+										<small>&#8226; {{ (theTime - item['created_at']).days // 7 }}w ago</small>
+									</div>
+								{% elif ((theTime - item['created_at']).days // 7) > 4 and (theTime - item['created_at']).days // 7 < 52 %}
+									<div class="created_at">
+										<small>&#8226; {{ (item['created_at'].year - theTime.year) * 12 + (item['created_at'].month - theTime.month) }}m ago</small>
+									</div>
+								{% else %}
+									<div class="created_at">
+										<small>&#8226; {{ item['created_at'].year - theTime.year }}y ago</small>
+									</div>
+								{% endif %}
+							{% endif %}
+						</div>
+						<div class="roomName">
+							<p class="roomP" style="background-color: #202123; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">&ldquo;{{ item['roomName']|title }}&rdquo;</p>
+						</div>
+						<p class="descP">About &rarr; {{ item['roomDescription'] }}</p>
+					</div>
+					<div class="itemBottom">
+						{% if item.creator_id == current_user.id %}
+							<div class="btnBox">
+								<form method="POST" action="">
+									<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" id="{{ item.roomID }}">
+									<input type="hidden" name="rooomID" value="{{ item.roomID }}">
+									<input type="hidden" name="join" value="join">
+									<button class="btn join">Join</button>
+								</form>
+							</div>
+							<div class="deleteBtn">
+								<form method="POST" action="">
+									<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="roomID" value="{{ item.roomID }}">
+									<button class="btn" id="del">Delete</button>
+								</form>
+							</div>
+						{% else %}
+							<div class="btnBox" id="{{ item.roomID }}">
+								<form method="POST" action="">
+									<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" id="{{ item.roomID }}">
+									<input type="hidden" name="rooomID" value="{{ item.roomID }}">
+									<input type="hidden" name="join" value="join">
+									<button class="btn">Join</button>
+								</form>
+							</div>
+						{% endif %}
+						<div class="users">
+							<i class="fa fa-users" aria-hidden="true"></i>
+							<p>Members&#58; {{ item['count'] }}</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div id="recentActSection">
+			<div id="recent-box">
+				<p>Recent Activities</p>
+			</div>
+			<div style="height: 85%; margin: 12px; overflow: auto; border-bottom: wheat 1px solid;">
+				{% if messages|length == 0 %}
+					<center><div style="margin-top: 50%; text-align: center; font-size: larger;">There is no recent activities...</div></center>
+				{% else %}
+					{% for message in messages %}
+						<div style="width: 100%; height: 100px; background-color: #202123; padding: 5px; margin-bottom: 10px;">
+							<div id="messageHeader">
+								<div>
+									<div style="display: flex; align-items: center;">
+										<div id="proImage">
+											{% set imageName = 'images/' + message[3] %}
+											<img src="{{ url_for('static', filename=imageName) }}" alt="" class="pro-img">
+										</div>
+										<p style="display: inline-block; padding-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@{{ message[0] }}</p>
+									</div>
+								</div>
+								<div style="display: flex">
+									<div style="display: inline-block; width: 50%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><p><small>replied&#8594; {{ message[1] }}</small></p></div>
+									<div style="position: relative; display: inline-block; text-align: right; width: 50%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+										{% if message[4].date() == theTime.date() %}
+											<div class="created_at">
+												<small>&#8226; {{ message[4].strftime("%I:%M %p") }}</small>
+											</div>
+										{% else %}
+											{% if (theTime - message[4]).days < 7 %}
+												<div class="created_at">
+													<small>&#8226; {{ (theTime - message[4]).days }}d ago</small>
+												</div>
+											{% elif (theTime - message[4]).days > 6 and (theTime - message[4]).days < 31 %}
+												<div class="created_at">
+													<small>&#8226; {{ (theTime - message[4]).days // 7 }}w ago</small>
+												</div>
+											{% elif ((theTime - message[4]).days // 7) > 4 and (theTime - message[4]).days // 7 < 52 %}
+												<div class="created_at">
+													<small>&#8226; {{ (message[4].year - theTime.year) * 12 + (message[4].month - theTime.month) }}m ago</small>
+												</div>
+											{% else %}
+												<div class="created_at">
+													<small>&#8226; {{ message[4].year - theTime.year }}y ago</small>
+												</div>
+											{% endif %}
+										{% endif %}
+									</div>
+								</div>
+							</div>
+							<div id="messageBody">
+								{{ message[2] }}
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</section>
+{% endblock content %}
+{% block end %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='scripts/socketio.js') }}"></script>
+<script type="text/javascript">
+	const current_userID = `{{ current_user.id }}`;
+	const current_roomID = `{{ rooom_id }}`;
+	const csrf_token = `{{ csrf_token() }}`;
+</script>
+{% endblock end %}
