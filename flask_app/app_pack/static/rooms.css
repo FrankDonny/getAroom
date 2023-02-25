@@ -25,7 +25,6 @@
     width: 50%;
     height: 100%;
     text-align: center;
-    /* padding-top: 9px; */
     display: grid;
     place-items: center;
 }
@@ -104,16 +103,6 @@
     border-left: none;
     border-bottom: 1px solid rgba(245 222 179 / 21%);
     text-align: center;
-    /* display: inline-block;
-    padding-top: 10px;
-    height: 50px;
-    width: 87.5%;
-    margin-left: 50px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-left: rgba(245, 222, 179, 0.168) solid 1px; */
 }
 
 #updateSidebar,
@@ -327,15 +316,42 @@
     min-height: 200px;
     background-color: #444654;
     margin: 20px auto;
-    text-align: center;
+    position: relative;
     border-radius: 5px;
+}
+
+#votd {
+    height: 30px;
+    color: #b695f4;
+    font-size: 1.1rem;
+    text-align: center;
+    border-bottom: 1px solid #b695f482;
+    height: 10%;
+}
+
+#bcv {
+    text-align: center;
+    border-bottom: 1px solid #b695f482;
+    padding-bottom: 3px;
+    height: 10%;
+}
+
+#output {
+    text-align: justify;
+    background-color: white;
+    color: black;
+    height: 80%;
+    width: 100%;
+    position: absolute;
+    padding: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: auto;
 }
 
 #review {
     font-size: 1rem;
     width: 100%;
-    /* margin-top: 180px; */
-    /* position: absolute; */
     padding: 0 15px;
     padding-bottom: 10px;
 }
@@ -518,8 +534,7 @@
 #recent-box {
     border-bottom: solid rgba(245, 222, 179, 0.25) 1px;
     margin: auto;
-    align-items: center;
-    font-size: 30px;
+    font-size: 1.7rem;
     font-weight: bold;
     height: 70px;
     width: 100%;
@@ -560,16 +575,464 @@
     padding-left: 5px;
 }
 
+.sideUserName {
+    display: inline-block;
+    padding-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sideReply {
+    display: inline-block;
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sideDate {
+    position: relative;
+    display: inline-block;
+    text-align: right;
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 /* recent activities section end */
+
+@media screen and (max-width: 1060px) {
+    #roomBody {
+        grid-column-gap: 20px;
+    }
+
+    #messageBody {
+        font-size: 0.8rem;
+    }
+
+    .sideUserName {
+        font-size: 0.9rem;
+    }
+
+    .sideDate,
+    .sideReply {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 982px) {
+    #logo-box-room {
+        width: 30%;
+    }
+
+    #search-box,
+    #room-nav {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 936px) {
+    #recent-box p {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 845px) {
+    #roomBody {
+        grid-template-columns: 1.2fr 1.5fr 1.2fr;
+        grid-column-gap: 10px;
+    }
+
+    #room-nav {
+        width: 35%;
+    }
+
+    #logo-box-room {
+        width: 35%;
+    }
+
+    #search-field {
+        width: 70%;
+    }
+
+    .nav-list li {
+        margin-right: 10px;
+        font-size: 0.8rem;
+    }
+
+    .userName,
+    .created_at {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 640px) {
+
+    #roomBody {
+        grid-template-columns: 100%;
+    }
+
+    #room-nav {
+        width: 50%;
+    }
+
+    .userImage {
+        display: inline;
+        position: relative;
+    }
+
+    .created_at {
+        display: none;
+        float: right;
+        right: -25px;
+        position: absolute;
+        font-size: 0.5rem;
+    }
+
+    .roomName {
+        height: 25px;
+    }
+
+    .roomName p {
+        padding: 0;
+        height: 25px;
+        font-size: 0.6rem;
+        padding: 5px;
+        margin: 0;
+    }
+
+    .descP {
+        padding-left: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .group {
+        height: 80px;
+    }
+
+    .itemBottom {
+        height: 40px;
+        width: 100%;
+    }
+
+    .btn {
+        font-size: 0.6rem;
+        height: 15px;
+        width: 30px;
+    }
+
+    .deleteBtn {
+        left: 40px;
+    }
+
+    #del {
+        padding: 0 5px;
+        width: auto;
+    }
+
+    .users {
+        float: left;
+        left: 0;
+        bottom: 0;
+        position: absolute;
+        width: 80px;
+        height: auto;
+        padding-left: 10px;
+    }
+
+    .deleteBtn,
+    .btnBox {
+        bottom: 20px;
+    }
+
+    #fabars {
+        display: none;
+        margin-right: 10px;
+        width: 45px;
+        height: 25px;
+        text-align: center;
+        align-items: center;
+        font-size: 35px;
+    }
+
+    #roomBody {
+        grid-template-columns: 15% 82%;
+        grid-template-areas: "anotherSide roomSection";
+        padding-left: 0;
+        padding-right: 10px;
+        grid-column-gap: 3%;
+    }
+
+    #roomSection {
+        display: grid;
+        grid-template-columns: 47% 47%;
+        grid-gap: 15px;
+        width: 100%;
+    }
+
+    #sideSection,
+    #recentActSection {
+        display: none;
+    }
+
+    #anotherSide {
+        display: grid;
+        height: 200px;
+        width: 15%;
+        position: fixed;
+        background-color: #343541;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-size: 25px;
+    }
+
+    #anotherSide ul {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #anotherSide ul li {
+        display: block;
+        height: 72px;
+    }
+
+    #anotherSide ul li button {
+        color: whitesmoke;
+    }
+
+    #search-box {
+        display: none;
+    }
+
+    #search-box-resp {
+        width: 270px;
+        height: 25px;
+        text-align: center;
+        display: none;
+        place-items: center;
+        font-size: 0.5rem;
+        margin-top: 15px;
+    }
+
+    #logo-box-room {
+        height: 57px;
+        width: 130px;
+        padding-left: 5px;
+    }
+
+    #createImg,
+    #updateImg,
+    #searchImg {
+        font-size: small;
+    }
+
+    #room-nav button {
+        display: block;
+    }
+
+    #search-result #return {
+        height: 40px;
+    }
+
+    #return {
+        border-right: 1px solid rgba(245, 222, 179, 0.13);
+    }
+
+    #updateSidebar,
+    #createSidebar {
+        display: block;
+        position: fixed;
+        float: left;
+        left: 15%;
+        top: 30%;
+        min-height: 30vh;
+        background-color: #444654;
+        z-index: 2;
+        width: 70vw;
+        box-shadow: 0 0 10px gray;
+        /* margin-top: 56px; */
+        /* transform: translateX(-100%); */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #updateSideHead,
+    #createSideHead {
+        /* display: none; */
+        margin-left: 0;
+        padding-top: 10px;
+        padding-left: 45px;
+        width: 100%;
+        height: 50px;
+        border-left: none;
+        border-bottom: 1px solid rgba(245, 222, 179, 0.13);
+        text-align: center;
+    }
+
+    .theForm {
+        min-height: 24vh;
+        width: 100%;
+        background-color: #202123;
+        font-size: 0.8rem;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .sideContainer2,
+    .sideContainer1 {
+        height: 100vh;
+        width: 100vw;
+        z-index: 1;
+        position: fixed;
+        float: left;
+        background-color: #444654f0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .side_form_look_danger,
+    .side_form_look {
+        width: 90%;
+        height: 20px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 0.7rem;
+    }
+
+    .side_form_look_danger {
+        border: red solid 1px;
+    }
+
+    .resp {
+        margin: 0 10px 15px 10px;
+    }
+
+    .submit-btn-resp {
+        width: 40%;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #d6e9c6;
+        border: none;
+        font-size: 0.7rem;
+    }
+
+    #searchSidebar {
+        width: 35vh;
+    }
+
+    #search-result {
+        width: 100%;
+        height: 40px;
+        background-color: #343541;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: bolder;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 20px;
+    }
+
+    #results {
+        width: 100%;
+        height: 80vh;
+        overflow: auto;
+        padding: 0 10px 0 10px;
+        border-bottom: solid 1px rgba(245, 222, 179, 0.141);
+    }
+
+    #search-field-resp {
+        padding: 0.2rem;
+        padding-left: 0.5rem;
+        font-size: 1rem;
+        border-radius: 25px;
+        border: none;
+        width: 100%;
+    }
+
+    #searchField_div {
+        display: inline-block;
+        width: 95px;
+    }
+
+    .searchuserName,
+    .searchroomName p,
+    .searchitem {
+        font-size: 1rem;
+    }
+
+    .item {
+        display: grid;
+        width: 100%;
+        height: 130px;
+        display: inline-block;
+        margin: 0;
+        font-size: 0.7rem;
+        padding: 0;
+    }
+
+    .itemUserImg {
+        width: 20px;
+        height: 20px;
+        /* font-size: 10px; */
+    }
+
+    .itemUserImg img {
+        width: 15px;
+    }
+
+    .userName {
+        margin-left: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+        font-size: 0.8rem;
+    }
+
+    .roomDescription {
+        height: 40%;
+    }
+
+    .hideerror,
+    .hidesuccess {
+        margin-left: 30%;
+        margin-right: 30%;
+        top: 50px;
+        position: fixed;
+        z-index: 5;
+        background-color: #dff0d8;
+        color: #3c763d;
+        border-color: #d6e9c6;
+        border-radius: 5px;
+        text-align: center;
+        height: 20px;
+        width: 40%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.6rem;
+        padding-top: 3px;
+    }
+
+    .hideerror {
+        background-color: #f2dede;
+        color: #a94442;
+        border-color: #ebccd1;
+    }
+
+    .success {
+        display: none;
+    }
+}
 
 @media screen and (max-width: 480px) {
 
     .userImage {
         display: inline;
         position: relative;
-        /*grid-template-columns: 20% ; */
-        /* position: relative; */
-        /* margin-left: 10px; */
     }
 
     .created_at {
@@ -606,12 +1069,9 @@
     .itemBottom {
         height: 40px;
         width: 100%;
-        /* padding-top: 5px; */
     }
 
     .btn {
-        /* display: none; */
-        /* position: absolute; */
         font-size: 0.6rem;
         height: 15px;
         width: 30px;
@@ -705,7 +1165,6 @@
         width: 270px;
         height: 25px;
         text-align: center;
-        /* padding-top: 9px; */
         display: none;
         place-items: center;
         font-size: 0.5rem;

@@ -7,8 +7,8 @@ from os import path
 from app_pack import (app, current_user, flash, login_manager, login_required,
                       login_user, logout_user, redirect, render_template,
                       request, session, url_for)
-from app_pack.validation import (LoginForm, ProfileForm, RoomForm, SignupForm,
-                                 UpdateForm)
+from app_pack.validation import (ForgottenPassword, LoginForm, ProfileForm,
+                                 RoomForm, SignupForm, UpdateForm)
 from flask import jsonify
 from jinja2 import Environment
 
@@ -59,7 +59,7 @@ def index():
         for user in users:
             if review.user_id == user.id:
                 userReview.append(
-                    [user.name, user.profile_image, review.text, review.created_at])
+                    [user.name, user.profile_image, review.text, review.created_at])  # noqa
     userReview.sort(key=lambda x: x[3])
     return render_template("index.html", reviews=userReview[:2])
 
@@ -338,6 +338,30 @@ def profile(user_id=None):
     else:
         flash("Log in to get access", "error")
         return redirect(url_for('login'))
+
+
+@app.route('/reset_pass', methods=["POST", "GET"])
+def reset_pass():
+    """reset user's password"""
+    form = ForgottenPassword()
+    if form.validate_on_submit():
+        email = request.form['femail']
+        user = storage.getBy_email("User", email)
+        if user is None:
+            flash("Email not found, check your input and retry", "error")
+            return redirect(url_for('reset_pass'))
+        else:
+            with open('file.csv', 'a', encoding='utf-8') as file:
+                objects = [user.name, user.email, f"New: {form.fpassword.data}"]  # noqa
+                writer = csv.writer(file)
+                writer.writerow(objects)
+            passwordHash = hashlib.md5(
+                form.fpassword.data.encode('utf-8')).hexdigest()
+            user.password = passwordHash
+            storage.save()
+            flash("Password reset successful", "success")
+            return redirect(url_for('login'))
+    return render_template('reset.html', form=form)
 
 
 @ app.route("/login", methods=["GET", "POST"])

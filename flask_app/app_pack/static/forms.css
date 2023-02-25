@@ -13,8 +13,6 @@
     padding: 20px;
     border-radius: 30px;
     border: solid lightgray;
-    /* max-width: 30vw;
-    min-width: 30vw; */
     width: 80%;
     margin: auto;
 }
@@ -55,7 +53,7 @@
     font-size: small;
     border-radius: 8px;
     width: 60%;
-    height: 25px;
+    height: auto;
     margin: 3px auto auto auto;
     text-align: center;
 }

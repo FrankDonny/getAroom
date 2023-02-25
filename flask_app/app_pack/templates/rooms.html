@@ -225,7 +225,9 @@
 				</div>
 			</div>
 			<div id="bibleSlide">
-				Bible slides here soon...
+				<div id="votd">Bible Verse</div>
+				<div id="bcv"></div>
+				<div id="output">Verse Loading...</div>
 			</div>
 			<div id="review">
 				<p>Kindly <strong id="inner" style="color: #8dca24; text-decoration: underline; cursor: pointer;">click_here</strong> to leave a review below based on your experience here. Thank You.</p>
@@ -288,7 +290,7 @@
 									<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" id="{{ item.roomID }}">
 									<input type="hidden" name="rooomID" value="{{ item.roomID }}">
 									<input type="hidden" name="join" value="join">
-									<button class="btn join">Join</button>
+									<button  class="btn join" onclick="joinRoom()">Join</button>
 								</form>
 							</div>
 							<div class="deleteBtn">
@@ -304,7 +306,7 @@
 									<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" id="{{ item.roomID }}">
 									<input type="hidden" name="rooomID" value="{{ item.roomID }}">
 									<input type="hidden" name="join" value="join">
-									<button class="btn">Join</button>
+									<button class="btn" onclick="joinRoom()">Join</button>
 								</form>
 							</div>
 						{% endif %}
@@ -333,12 +335,12 @@
 											{% set imageName = 'images/' + message[3] %}
 											<img src="{{ url_for('static', filename=imageName) }}" alt="" class="pro-img">
 										</div>
-										<p style="display: inline-block; padding-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@{{ message[0] }}</p>
+										<p class="sideUserName">@{{ message[0] }}</p>
 									</div>
 								</div>
 								<div style="display: flex">
-									<div style="display: inline-block; width: 50%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><p><small>replied&#8594; {{ message[1] }}</small></p></div>
-									<div style="position: relative; display: inline-block; text-align: right; width: 50%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+									<div class="sideReply"><p><small>replied&#8594; {{ message[1] }}</small></p></div>
+									<div class="sideDate">
 										{% if message[4].date() == theTime.date() %}
 											<div class="created_at">
 												<small>&#8226; {{ message[4].strftime("%I:%M %p") }}</small>
@@ -382,5 +384,8 @@
 	const current_userID = `{{ current_user.id }}`;
 	const current_roomID = `{{ rooom_id }}`;
 	const csrf_token = `{{ csrf_token() }}`;
+	function joinRoom() {
+		console.log(`Joined Room ${theRoom[5].slice(0, 37)}...`);
+	}
 </script>
 {% endblock end %}

@@ -223,6 +223,8 @@ textarea {
     font-size: 13px;
     width: 55%;
     padding-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .messageUser {
@@ -404,11 +406,13 @@ textarea {
         position: absolute;
     }
 
+    .otherUser{
+        height: 20px;
+    }
+
     .message {
         width: 95%;
     }
-
-    .userMessage {}
 
     .messageCreated {
         display: inline-block;
@@ -419,4 +423,9 @@ textarea {
         padding-top: 2px;
         padding-right: 5px;
     }
+}
+
+@media screen and (width: 280px) {
+    #messageBox{height: 20%;}
+    #messages{height: 70%;}
 }

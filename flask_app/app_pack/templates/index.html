@@ -78,13 +78,15 @@
                     <button onclick="window.location.href = '/login'">Login</button>
                 </div>
             </div>
-            <div id="second">second</div>
+            <div id="second">
+                <img src="{{ url_for('static', filename='images/sec.png') }}" alt="">
+            </div>
             <div id="idxReviews">
                 <div id="reviewContainer">
                     <p>Reviews</p>
                     {% for review in reviews %}
                         <div class="reviewBox">
-                            <div style="height: 70%; background-color: white; border-radius: 10px; padding-top: 10px">{{ review[2] }}</div>
+                            <div style="height: 70%; background-color: white; border-radius: 10px; padding: 10px 5px 0 5px;">{{ review[2] }}</div>
                             <div style="height: 27%; display: flex; margin: auto; border-radius: 10px;">
                                 <div style="width: 25px; height: 25px; display: inline-block; margin: auto 3px; border-radius: 50%; border: 2px solid orange;">
                                     {% set image = 'images/' + review[1] %}
@@ -96,7 +98,9 @@
                     {% endfor %}
                 </div>
             </div>
-            <div id="fourth">fourth</div>
+            <div id="fourth">
+                <img src="{{ url_for('static', filename="images/4th.png") }}" alt="">
+            </div>
         </section>
     </section>
 {% endblock content %}

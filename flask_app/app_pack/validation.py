@@ -89,11 +89,22 @@ class ProfileForm(FlaskForm):
                                        FileSize(2048*1024)])
     profileName = StringField(label='Update User Name',
                               validators=[Length(min=2, max=60)])
-    proEmail = StringField(label='Update Email',
-                           validators=[Email('Invalid Email')])
+    proEmail = StringField(label='Update Email', validators=[
+                           Email('Invalid Email')])
     proNumber = StringField(label='Update Phone Number')
     proSubmit = SubmitField("Update")
 
     def validate_number(self, number):
         if len(number.data) > 15:
             raise ValidationError("Number too long")
+
+
+class ForgottenPassword(FlaskForm):
+    """Forgotten password form"""
+    femail = StringField("Email", validators=[
+                         Email('Invalid Email'), InputRequired()])
+    fpassword = PasswordField("New Password", validators=[InputRequired()])
+    fconfirmPassword = PasswordField("Confirm Password", validators=[
+        InputRequired(), EqualTo("fpassword",
+                                 message="The password does not match")])
+    fsubmit = SubmitField("submit")

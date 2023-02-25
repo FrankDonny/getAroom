@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from app_pack import app , send, socketio, join_room, leave_room
+from app_pack import app, send, socketio, join_room, leave_room
 
 from models import storage
 from models.messages import Message

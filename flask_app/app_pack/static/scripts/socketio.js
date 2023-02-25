@@ -1,26 +1,6 @@
 let socket = io();
 
-function joinRoom() {
-    // socket.emit('join', {'name': current_userName, 'room_id': `${theRoom[5].slice(0, 37)}`});
-}
-
-function exitRoom() {
-    // console.log('exiting the room...')
-    const theRoom = location.href.split('/');
-    $.ajax({
-        type: 'POST',
-        url: `/chatroom/${current_userID.slice(0, 13)}/${theRoom[5].slice(0, 37)}`,
-        data: { 'user_id': current_userID, 'room_id': theRoom[5].slice(0, 37), 'one': 'one' },
-        headers: { 'X-CSRFToken': csrf_token },
-        success: () => {
-            // socket.emit('leave', {'name': current_userName, 'room_id': `${theRoom[5].slice(0, 37)}`});
-            window.location.href = `/rooms/${current_userID.slice(0, 13)}`;
-        },
-        error: (error) => {
-            console.log(error);
-        }
-    })
-}
+const theRoom = location.href.split('/');
 
 socket.on('message', function (data) {
     if (location.href.includes(data['room_id'])) {
@@ -86,6 +66,30 @@ socket.on('message', function (data) {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 })
+
+function joinRoom(e) {
+    e.preventDefault();
+    console.log(`Joined Room ${theRoom[5].slice(0, 37)}...`);
+}
+    // console.log(`Joined Room ${theRoom[5].slice(0, 37)}...`)
+    // socket.emit('join', { 'name': current_userName, 'room_id': `${theRoom[5].slice(0, 37)}` });
+
+function exitRoom() {
+    // console.log('exiting the room...')
+    $.ajax({
+        type: 'POST',
+        url: `/chatroom/${current_userID.slice(0, 13)}/${theRoom[5].slice(0, 37)}`,
+        data: { 'user_id': current_userID, 'room_id': theRoom[5].slice(0, 37), 'one': 'one' },
+        headers: { 'X-CSRFToken': csrf_token },
+        success: () => {
+            // socket.emit('leave', {'name': current_userName, 'room_id': `${theRoom[5].slice(0, 37)}`});
+            window.location.href = `/rooms/${current_userID.slice(0, 13)}`;
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
+}
 
 const button = document.querySelector("#textBoxID");
 button.addEventListener('keypress', (event) => {

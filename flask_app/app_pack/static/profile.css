@@ -103,6 +103,16 @@ body {
     margin: auto;
 }
 
+/*#reviewInPro{
+    /* float: right;
+    right: 0;
+    top: 50px;
+    font-size: 1rem;
+    width: 400px;
+    padding: 0 15px;
+    padding-bottom: 10px;
+} */
+
 @media screen and (max-width: 480px) {
     #profile-user-name {
         font-size: 0.7rem;
