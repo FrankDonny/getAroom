@@ -14,7 +14,7 @@ class DBStorage:
 
     def __init__(self):
         """initializing the class by creating the session engine"""
-        self.__engine = create_engine('mysql+mysqldb://FrankDonny.mysql.pythonanywhere-services.com',
+        self.__engine = create_engine('mysql+mysqldb://FrankDonny:getAroompass@FrankDonny.mysql.pythonanywhere-services.com/getAroom_DB',
                                       pool_pre_ping=True)
 
     def all(self, cls=None):
