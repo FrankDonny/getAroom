@@ -25,3 +25,6 @@ def join(data):
 @socketio.on('leave')
 def leave(data):
     pass
+
+def create_app():
+    return app
