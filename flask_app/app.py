@@ -25,8 +25,3 @@ def join(data):
 @socketio.on('leave')
 def leave(data):
     pass
-
-
-if __name__ == '__main__':
-    # app.run(port=5000)
-    socketio.run(app, debug=True)
