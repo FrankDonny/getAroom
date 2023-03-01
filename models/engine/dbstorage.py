@@ -6,11 +6,6 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 # from os import getenv
 # import json
 
-username = "MYSELF"
-password = "MY_PASS"
-host = "HOST"
-dataB = "MY_DATABASE"
-
 
 class DBStorage:
     __engine = None
@@ -19,8 +14,7 @@ class DBStorage:
 
     def __init__(self):
         """initializing the class by creating the session engine"""
-        self.__engine = create_engine('mysql+mysqldb://web_app_user:'
-                                      'pass@localhost:3306/web_app_DB',
+        self.__engine = create_engine('mysql+mysqldb://FrankDonny.mysql.pythonanywhere-services.com',
                                       pool_pre_ping=True)
 
     def all(self, cls=None):
@@ -49,8 +43,6 @@ class DBStorage:
 
     def new(self, obj):
         """adds a new instance of a class to the current session"""
-        # dict_ = {f"{obj.__class__.__name__}" + '.' + f"{obj.id}": obj}
-        # self.__objects.update(dict_)
         self.__session.add(obj)  # type: ignore
 
     def save(self):
@@ -108,7 +100,8 @@ class DBStorage:
     def getBy_userID_roomID(self, cls, user_id, room_id):
         """get a specific member of a class"""
         objs = self.all(cls)
-        objsList = [value for value in objs.values() if value.user_id == user_id and value.room_id == room_id]
+        objsList = [value for value in objs.values(
+        ) if value.user_id == user_id and value.room_id == room_id]
         if len(objsList) != 0:
             return objsList[0]
 

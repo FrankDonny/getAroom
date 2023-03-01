@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from app_pack import app, send, socketio, join_room, leave_room
+from app_pack import app, join_room, leave_room, send, socketio
 
 from models import storage
 from models.messages import Message
@@ -25,6 +25,3 @@ def join(data):
 @socketio.on('leave')
 def leave(data):
     pass
-
-def create_app():
-    return app
