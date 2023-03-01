@@ -105,12 +105,19 @@
     text-align: center;
 }
 
+#reviewSidebar,
 #updateSidebar,
 #createSidebar {
     display: none;
 }
 
-/**/
+#sendReview {
+    height: 30px;
+    border-radius: 5px;
+    width: 40%;
+    margin: 0 30%;
+    border: none;
+}
 
 .searchbtnBox {
     display: inline-block;
@@ -781,7 +788,7 @@
 
     #anotherSide {
         display: grid;
-        height: 200px;
+        height: 300px;
         width: 15%;
         position: fixed;
         background-color: #343541;
@@ -843,6 +850,7 @@
         border-right: 1px solid rgba(245, 222, 179, 0.13);
     }
 
+    #reviewSidebar,
     #updateSidebar,
     #createSidebar {
         display: block;
@@ -855,11 +863,14 @@
         z-index: 2;
         width: 70vw;
         box-shadow: 0 0 10px gray;
-        /* margin-top: 56px; */
-        /* transform: translateX(-100%); */
         transition: transform 0.3s ease-in-out;
     }
 
+    #reviewSidebar {
+        min-height: 300px;
+    }
+
+    #reviewSideHead,
     #updateSideHead,
     #createSideHead {
         /* display: none; */
@@ -873,6 +884,12 @@
         text-align: center;
     }
 
+    #revDiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .theForm {
         min-height: 24vh;
         width: 100%;
@@ -882,6 +899,7 @@
         padding: 10px 0;
     }
 
+    .sideContainer3,
     .sideContainer2,
     .sideContainer1 {
         height: 100vh;
@@ -1133,7 +1151,7 @@
 
     #anotherSide {
         display: grid;
-        height: 200px;
+        height: 300px;
         width: 15%;
         position: fixed;
         background-color: #343541;
@@ -1195,6 +1213,7 @@
         border-right: 1px solid rgba(245, 222, 179, 0.13);
     }
 
+    #reviewSidebar,
     #updateSidebar,
     #createSidebar {
         display: block;
@@ -1207,11 +1226,14 @@
         z-index: 2;
         width: 70vw;
         box-shadow: 0 0 10px gray;
-        /* margin-top: 56px; */
-        /* transform: translateX(-100%); */
         transition: transform 0.3s ease-in-out;
     }
 
+    #reviewSidebar {
+        min-height: 300px;
+    }
+
+    #reviewSideHead,
     #updateSideHead,
     #createSideHead {
         /* display: none; */
@@ -1225,6 +1247,13 @@
         text-align: center;
     }
 
+    #revDiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+    }
+
     .theForm {
         min-height: 24vh;
         width: 100%;
@@ -1234,6 +1263,7 @@
         padding: 10px 0;
     }
 
+    .sideContainer3,
     .sideContainer2,
     .sideContainer1 {
         height: 100vh;
@@ -1309,6 +1339,7 @@
     #searchField_div {
         display: inline-block;
         width: 95px;
+        text-align: center;
     }
 
     .searchuserName,

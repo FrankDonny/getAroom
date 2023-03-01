@@ -256,6 +256,48 @@ function click3() {
     }
 }
 
+
+const show1 = document.querySelector('#innerr')
+const theBdy = document.querySelector('#revDiv')
+show1.addEventListener('click', () => {
+    if (theBdy.style.display === 'flex') {
+        theBdy.style.display = 'none';
+    } else {
+        theBdy.style.display = 'flex';
+    }
+})
+
+const sendBtn = document.querySelector('#sendReview');
+const reviewTextField = document.querySelector('#reviewTextField');
+sendBtn.addEventListener('click', (event) => {
+    if (reviewTextField.value.trim("") === "") {
+        event.preventDefault();
+        alert("No input was given");
+        return;
+    }
+    event.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: `/rooms/${current_userID.slice(0, 13)}`,
+        data: { 'reviewText': reviewTextField.value },
+        headers: { 'X-CSRFToken': csrf_token },
+        success: (response) => {
+            buttonSend.style.border = "1px solid #8dca24";
+            newDiv = document.createElement("div");
+            newDiv.style.height = "auto";
+            newDiv.style.width = "100%";
+            newDiv.style.backgroundColor = "#dff0d8";
+            newDiv.style.color = "#3c763d";
+            newDiv.style.border = "2px solid #d6e9c6";
+            newDiv.style.textAlign = "center";
+            newDiv.style.marginBottom = "10px";
+            newDiv.innerText = response;
+            theDiv = document.querySelector("#reviewSidebar");
+            theDiv.append(newDiv);
+        }
+    })
+})
+
 const show = document.querySelector('#inner');
 textBody = document.querySelector('#review div');
 show.addEventListener('click', () => {
@@ -358,3 +400,5 @@ function fetchData() {
 }
 
 fetchData();
+
+

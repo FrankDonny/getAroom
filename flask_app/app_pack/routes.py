@@ -2,6 +2,7 @@ import csv
 import hashlib
 import secrets
 from datetime import datetime
+import random
 from os import path
 
 from app_pack import (app, current_user, flash, login_manager, login_required,
@@ -60,8 +61,11 @@ def index():
             if review.user_id == user.id:
                 userReview.append(
                     [user.name, user.profile_image, review.text, review.created_at])  # noqa
-    userReview.sort(key=lambda x: x[3])
-    return render_template("index.html", reviews=userReview[:2])
+    revs = []
+    for _ in range(0, 2):
+        value = random.randint(0, len(userReview) - 1)
+        revs.append(userReview[value])
+    return render_template("index.html", reviews=revs)
 
 
 @app.route("/rooms/<user_id>", methods=["GET", "POST"])

@@ -9,7 +9,7 @@
 		<form method="POST" id="room-form hide-search">
 			<input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 			<div id="searchField_div">
-				<input type="search" id="search-field-resp" name="query" placeholder="Search" require>
+				<input type="search" id="search-field-resp" name="query" placeholder="Search: case sensitive" require>
 			</div>
 				<button onclick="func1(event)" style="height: 20px; width: 20px; background: none; border: none;"></button>
 		</form>
@@ -17,7 +17,7 @@
 	<div id="search-box">
 		<form method="POST" id="room-form">
 			<input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-			<input type="search" id="search-field" name="query" placeholder="Search" require>
+			<input type="search" id="search-field" name="query" placeholder="search: case sensitive" require>
 		</form>
 	</div>
 	<div id="room-nav">
@@ -134,6 +134,21 @@
 			</div>
 		</div>
 	</section>
+	<section class="sideContainer3">
+		<div id="reviewSidebar">
+			<div id="return" onclick="returnBtn('.sideContainer3')">&#8592;</div>
+			<div id="reviewSideHead">Leave a Review</div>
+			<div id="reviewSide">
+				<p style="padding: 5px;">Kindly <strong id="innerr" style="color: #8dca24; text-decoration: underline; cursor: pointer;">click_here</strong> to leave a review below based on your experience here. Thank You.</p>
+				<div id="revDiv" style="display: none;">
+					<form method="POST" style="width: 90%">
+						<textarea name="review" id="reviewTextField" style="border: none; display: block; height: 150px; width: 100%; margin-bottom: 5px;" cols="30" rows="10"></textarea>
+						<button id="sendReview">send</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
 	<section id="roomBody">
 		{% set rooom_id = "" %}
 		<div id="anotherSide">
@@ -141,6 +156,7 @@
 				<li id="click1"><button style="border: none; background: none" onclick="click1('.sideContainer1')"><i class="fa-solid fa-square-plus"></i><div id="createImg">Create</div></button></li>
 				<li id="click2"><button style="border: none; background: none" onclick="click1('.sideContainer2')"><i class="fa-solid fa-pen-to-square"></i><div id="updateImg">Update</div></li>
 				<li id="click3"><button style="border: none; background: none" onclick="click3()"><i class="fa-solid fa-magnifying-glass"></i><div id="searchImg">Search</div></li>
+				<li id="click4"><button style="border: none; background: none" onclick="click1('.sideContainer3')"><i class="fa-sharp fa-user-magnifying-glass"></i><div id="rev">Review</div></li>
 			</ul>
 		</div>
 		<div id="sideSection">
@@ -231,7 +247,7 @@
 			</div>
 			<div id="review">
 				<p>Kindly <strong id="inner" style="color: #8dca24; text-decoration: underline; cursor: pointer;">click_here</strong> to leave a review below based on your experience here. Thank You.</p>
-				<div id="revDiv" style="display: none;">
+				<div style="display: none;">
 					<form method="POST" action="">
 						<textarea name="review" id="reviewInput" style="border: none; " cols="30" rows="10"></textarea>
 					</form>

@@ -29,7 +29,7 @@
             <form method="POST" id="room-form hide-search">
                 <input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div style="display: inline-block; width: auto;">
-                    <input type="search" id="search-field" name="query" placeholder="Search" require>
+                    <input type="search" id="search-field" name="query" placeholder="search: case sensitive" require>
                 </div>
                     <button onclick="func(event)" style="height: 20px; width: 20px; background: none; border: none;"><i class="fa-solid fa-magnifying-glass"></i></i></button>
             </form>
@@ -38,7 +38,7 @@
             <form method="POST" id="room-form">
                 <input id="csrf" type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div style="display: inline-block; width: auto;">
-                    <input type="search" id="search-field" name="query" placeholder="Search" require>
+                    <input type="search" id="search-field" name="query" placeholder="search: case sensitive" require>
                 </div>
                 <div style="height: 20px; width: 20px; display: inline-block;">
                     <input id="img-submit" onclick="func(event)" type="image" src="{{ url_for('static', filename='images/search.png') }}" alt="search" style="height: 80%; width: 80%;">
