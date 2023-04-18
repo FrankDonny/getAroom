@@ -384,6 +384,7 @@ function fetchData() {
     fetch(`https://ajith-holy-bible.p.rapidapi.com/GetVerseOfaChapter?Book=${bibleArray[rand]}&chapter=${randChap}&Verse=${randVerse}`, options)
         .then(response => response.json())
         .then(response => {
+            console.log(response)
             if (response.Output === "Wrong slection!!! Please try again.") {
                 fetchData();
             } else {
